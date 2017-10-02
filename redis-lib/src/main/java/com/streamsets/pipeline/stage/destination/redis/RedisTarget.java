@@ -175,7 +175,7 @@ public class RedisTarget extends BaseTarget {
 
   private void getRedisConnection() {
     JedisPoolConfig poolConfig = new JedisPoolConfig();
-    pool = new JedisPool(poolConfig, URI.create(conf.uri), conf.connectionTimeout);
+    pool = new JedisPool(poolConfig, URI.create(conf.uri), conf.connectionTimeout * 1000); // connectionTimeout value is in seconds
     String userInfo = URI.create(conf.uri).getUserInfo();
     jedis = pool.getResource();
     if (userInfo != null && userInfo.split(":", 2).length > 0) {
